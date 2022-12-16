@@ -12,6 +12,10 @@ class _HomeState extends State<Home> {
   DateTime endDate = DateTime.now();
   var adult_number = 0.0;
   var child_number = 0.0;
+  bool? bfast = true;
+  bool? inet = true;
+  bool? pking = true;
+  bool? lunch = true;
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -122,6 +126,77 @@ class _HomeState extends State<Home> {
                   ),
                 ],
               ),
+              Container(
+                height: 400,
+                child: Column(
+                  children: [
+                    CheckboxListTile(
+                      title: const Text(
+                        'Breakfast (RM 20/Day)',
+                        style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.deepOrange,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      onChanged: (bool? value) {
+                        setState(() {
+                          bfast = value;
+                        });
+                      },
+                      value: bfast,
+                    ),
+                    CheckboxListTile(
+                      title: const Text(
+                        'Internet (RM 5/Day)',
+                        style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.deepOrange,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      onChanged: (bool? value) {
+                        setState(() {
+                          inet = value;
+                        });
+                      },
+                      value: inet,
+                    ),
+                    CheckboxListTile(
+                      title: const Text(
+                        'Parking (RM 5/Day)',
+                        style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.deepOrange,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      onChanged: (bool? value) {
+                        setState(() {
+                          pking = value;
+                        });
+                      },
+                      value: pking,
+                    ),
+                    CheckboxListTile(
+                      title: const Text(
+                        'Lunch (RM 40/Day)',
+                        style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.deepOrange,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      onChanged: (bool? value) {
+                        setState(() {
+                          lunch = value;
+                        });
+                      },
+                      value: lunch,
+                    ),
+                  ],
+                ),
+              )
             ],
           ),
         ),
