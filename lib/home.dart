@@ -9,6 +9,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   DateTime startDate = DateTime.now();
+  DateTime endDate = DateTime.now();
 
   @override
   Widget build(BuildContext context) {
@@ -25,17 +26,50 @@ class _HomeState extends State<Home> {
             children: [
               Row(
                 children: [
-                  const Text('Check-in Date:'),
+                  const Text(
+                    'Check-in Date: ',
+                    style: TextStyle(
+                        fontSize: 20,
+                        color: Colors.deepOrange,
+                        fontWeight: FontWeight.bold),
+                  ),
                   Expanded(
-                      child: Text(
-                          '${startDate.day}-${startDate.month}-${startDate.year}')),
+                    child: Text(
+                      ' ${startDate.day}-${startDate.month}-${startDate.year}',
+                      style:
+                          const TextStyle(fontSize: 20.0, color: Colors.blue),
+                    ),
+                  ),
                   IconButton(
                       onPressed: () {
                         selectDate(context);
                       },
                       icon: const Icon(Icons.date_range)),
                 ],
-              )
+              ),
+              Row(
+                children: [
+                  const Text(
+                    'Check-out Date: ',
+                    style: TextStyle(
+                        fontSize: 20,
+                        color: Colors.deepOrange,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  Expanded(
+                    child: Text(
+                      ' ${endDate.day}-${endDate.month}-${endDate.year}',
+                      style:
+                          const TextStyle(fontSize: 20.0, color: Colors.blue),
+                    ),
+                  ),
+                  IconButton(
+                      onPressed: () {
+                        selectEndDate(context);
+                      },
+                      icon: const Icon(Icons.date_range)),
+                ],
+              ),
             ],
           ),
         ),
@@ -54,6 +88,21 @@ class _HomeState extends State<Home> {
     if (picked != null && picked != startDate) {
       setState(() {
         startDate = picked;
+      });
+    }
+  }
+
+  Future<Null> selectEndDate(BuildContext context) async {
+    final DateTime? pickedEnd = await showDatePicker(
+      context: context,
+      initialDate: endDate,
+      firstDate: DateTime(2022),
+      lastDate: DateTime(2024),
+    );
+
+    if (pickedEnd != null && pickedEnd != endDate) {
+      setState(() {
+        endDate = pickedEnd;
       });
     }
   }
