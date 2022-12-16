@@ -1,3 +1,4 @@
+import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatefulWidget {
@@ -17,6 +18,10 @@ class _HomeState extends State<Home> {
   bool? inet = true;
   bool? pking = true;
   bool? lunch = true;
+
+  final GlobalKey<ScaffoldMessengerState> scaffoldMessengerKey =
+      GlobalKey<ScaffoldMessengerState>();
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -287,11 +292,25 @@ class _HomeState extends State<Home> {
                     ),
                   ],
                 ),
-                ElevatedButton(
-                    onPressed: () {
-                      confirm(context);
-                    },
-                    child: const Text('Search for room'))
+                Row(
+                  children: [
+                    Expanded(
+                      child: ElevatedButton(
+                          onPressed: () {
+                            confirm(context);
+                          },
+                          child: const Text('Search for room')),
+                    ),
+                    const SizedBox(width: 10),
+                    Expanded(
+                      child: ElevatedButton(
+                          onPressed: () {
+                            showSimpleSnackbar(context);
+                          },
+                          child: const Text('Snackbar trigger')),
+                    ),
+                  ],
+                )
               ],
             ),
           ),
@@ -336,7 +355,9 @@ class _HomeState extends State<Home> {
         'Are you sure?',
         style: TextStyle(color: Colors.orange),
       ),
-      content: const Text('Welcome to ABC Hotel. Hope you enjoy the holiday.'),
+      content: Column(
+        children: const [TextField()],
+      ),
       actions: [
         ElevatedButton(
           onPressed: () {
@@ -360,5 +381,13 @@ class _HomeState extends State<Home> {
         return alertDialog;
       },
     );
+  }
+
+  void showSimpleSnackbar(BuildContext context) {
+    Flushbar(
+      duration: const Duration(seconds: 3),
+      title: "This is simple flushbar",
+      message: "Hey, you are a registered user now.",
+    ).show(context);
   }
 }
