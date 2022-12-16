@@ -286,7 +286,12 @@ class _HomeState extends State<Home> {
                       ),
                     ),
                   ],
-                )
+                ),
+                ElevatedButton(
+                    onPressed: () {
+                      confirm(context);
+                    },
+                    child: const Text('Search for room'))
               ],
             ),
           ),
@@ -323,5 +328,37 @@ class _HomeState extends State<Home> {
         endDate = pickedEnd;
       });
     }
+  }
+
+  void confirm(BuildContext context) {
+    var alertDialog = AlertDialog(
+      title: const Text(
+        'Are you sure?',
+        style: TextStyle(color: Colors.orange),
+      ),
+      content: const Text('Welcome to ABC Hotel. Hope you enjoy the holiday.'),
+      actions: [
+        ElevatedButton(
+          onPressed: () {
+            print('ok');
+            Navigator.pop(context);
+          },
+          child: const Text('Ok'),
+        ),
+        ElevatedButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          child: const Text('Cancel'),
+        )
+      ],
+    );
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alertDialog;
+      },
+    );
   }
 }
