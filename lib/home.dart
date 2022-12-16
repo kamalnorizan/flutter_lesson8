@@ -10,7 +10,8 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   DateTime startDate = DateTime.now();
   DateTime endDate = DateTime.now();
-
+  var adult_number = 0.0;
+  var child_number = 0.0;
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -52,9 +53,10 @@ class _HomeState extends State<Home> {
                   const Text(
                     'Check-out Date: ',
                     style: TextStyle(
-                        fontSize: 20,
-                        color: Colors.deepOrange,
-                        fontWeight: FontWeight.bold),
+                      fontSize: 20,
+                      color: Colors.deepOrange,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                   Expanded(
                     child: Text(
@@ -68,6 +70,56 @@ class _HomeState extends State<Home> {
                         selectEndDate(context);
                       },
                       icon: const Icon(Icons.date_range)),
+                ],
+              ),
+              Row(
+                children: [
+                  Text(
+                    'Adults:    $adult_number',
+                    style: const TextStyle(
+                      fontSize: 20,
+                      color: Colors.deepOrange,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Container(
+                    width: 250,
+                    child: Slider(
+                        value: adult_number,
+                        divisions: 6,
+                        min: 0,
+                        max: 6,
+                        onChanged: (selected) {
+                          setState(() {
+                            adult_number = selected;
+                          });
+                        }),
+                  ),
+                ],
+              ),
+              Row(
+                children: [
+                  Text(
+                    'Child:    $child_number',
+                    style: const TextStyle(
+                      fontSize: 20,
+                      color: Colors.deepOrange,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Container(
+                    width: 250,
+                    child: Slider(
+                        value: child_number,
+                        divisions: 6,
+                        min: 0,
+                        max: 6,
+                        onChanged: (selected) {
+                          setState(() {
+                            child_number = selected;
+                          });
+                        }),
+                  ),
                 ],
               ),
             ],
